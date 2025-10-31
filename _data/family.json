@@ -1,0 +1,676 @@
+{
+  "name": "Gova",
+  "spouse": "",
+  "children": [
+    {
+      "name": "Akhi",
+      "spouse": "",
+      "children": [
+        {
+          "name": "Arajan",
+          "spouse": "",
+          "children": [
+            {
+              "name": "Hari",
+              "spouse": "",
+              "children": [
+                {
+                  "name": "Keshav",
+                  "spouse": "",
+                  "children": [
+                    {
+                      "name": "Narshih",
+                      "spouse": "Santok",
+                      "children": [
+                        {
+                          "name": "Javi",
+                          "daughter": true,
+                          "spouse": "Thobhan",
+                          "children": []
+                        },
+                        {
+                          "name": "Devraj",
+                          "spouse": "Savita",
+                          "children": [
+                            {
+                              "name": "Harsukh",
+                              "spouse": "Dhiri",
+                              "children": [
+                                {
+                                  "name": "Manish",
+                                  "spouse": "Nehal",
+                                  "children": [
+                                    {
+                                      "name": "Zeel",
+                                      "daughter": true,
+                                      "spouse": "",
+                                      "children": []
+                                    },
+                                    {
+                                      "name": "Hetvik",
+                                      "spouse": "",
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Raj",
+                                  "spouse": "Geeta",
+                                  "children": [
+                                    {
+                                      "name": "Nirva",
+                                      "daughter": true,
+                                      "spouse": "",
+                                      "children": []
+                                    },
+                                    {
+                                      "name": "Reva",
+                                      "daughter": true,
+                                      "spouse": "",
+                                      "children": []
+                                    },
+                                    {
+                                      "name": "Man",
+                                      "spouse": "",
+                                      "children": []
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "Atul",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Kanti",
+                              "spouse": "Jaya",
+                              "children": [
+                                {
+                                  "name": "Riddhi",
+                                  "daughter": true,
+                                  "spouse": "Pankaj",
+                                  "children": []
+                                },
+                                {
+                                  "name": "Kirti",
+                                  "daughter": true,
+                                  "spouse": "Rakesh",
+                                  "children": []
+                                },
+                                {
+                                  "name": "Vivek",
+                                  "spouse": "Pooja",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Chandu",
+                              "spouse": "Hansa",
+                              "children": [
+                                {
+                                  "name": "Ashish",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Dhansukh",
+                              "spouse": "Geeta",
+                              "children": [
+                                {
+                                  "name": "Ruchi",
+                                  "daughter": true,
+                                  "spouse": "",
+                                  "children": []
+                                },
+                                {
+                                  "name": "Yash",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Magi",
+                          "daughter": true,
+                          "spouse": "Kanji",
+                          "children": []
+                        },
+                        {
+                          "name": "Hemi",
+                          "daughter": true,
+                          "spouse": "Amba",
+                          "children": []
+                        },
+                        {
+                          "name": "Ramji",
+                          "spouse": "Mukta",
+                          "children": [
+                            {
+                              "name": "Hansa",
+                              "daughter": true,
+                              "spouse": "Praful",
+                              "children": []
+                            },
+                            {
+                              "name": "Neeta",
+                              "daughter": true,
+                              "spouse": "Ramesh",
+                              "children": []
+                            },
+                            {
+                              "name": "Ratilal",
+                              "spouse": "Sita",
+                              "children": []
+                            },
+                            {
+                              "name": "Bharat",
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Zamku",
+                          "daughter": true,
+                          "spouse": "Magan",
+                          "children": []
+                        },
+                        {
+                          "name": "Chhagan",
+                          "spouse": "Jaya",
+                          "children": [
+                            {
+                              "name": "Bhanu",
+                              "daughter": true,
+                              "spouse": "Ashwin",
+                              "children": []
+                            },
+                            {
+                              "name": "Rashik",
+                              "spouse": "Revanta",
+                              "children": [
+                                {
+                                  "name": "Harvi",
+                                  "daughter": true,
+                                  "spouse": "",
+                                  "children": []
+                                },
+                                {
+                                  "name": "Neel",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Manoj",
+                              "spouse": "Geeta",
+                              "children": [
+                                {
+                                  "name": "Yarvi",
+                                  "daughter": true,
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Praful",
+                              "spouse": "Chetna",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Labhu",
+                          "daughter": true,
+                          "spouse": "Shamji",
+                          "children": []
+                        },
+                        {
+                          "name": "Indu",
+                          "daughter": true,
+                          "spouse": "Damji",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Jina",
+                      "spouse": "",
+                      "children": []
+                    },
+                    {
+                      "name": "Kashtur",
+                      "daughter": true,
+                      "spouse": "Mohan",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Premji",
+                  "spouse": "Ladhi",
+                  "children": [
+                    {
+                      "name": "Naran",
+                      "spouse": "Mani",
+                      "children": [
+                        {
+                          "name": "Vallabh",
+                          "spouse": "",
+                          "children": [
+                            {
+                              "name": "Lalit",
+                              "spouse": "Dharmishta",
+                              "children": [
+                                {
+                                  "name": "Gargi",
+                                  "daughter": true,
+                                  "spouse": "",
+                                  "children": []
+                                },
+                                {
+                                  "name": "Tanuj",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Amrutlal",
+                          "spouse": "Manujla",
+                          "children": [
+                            {
+                              "name": "Rima",
+                              "daughter": true,
+                              "spouse": "Pritesh",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Manu",
+                          "spouse": "Bhanu",
+                          "children": [
+                            {
+                              "name": "Nayna",
+                              "daughter": true,
+                              "spouse": "Vijay",
+                              "children": []
+                            },
+                            {
+                              "name": "Jignesh",
+                              "spouse": "Radhika",
+                              "children": [
+                                {
+                                  "name": "Yug",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Kishan",
+                              "spouse": "Alka",
+                              "children": [
+                                {
+                                  "name": "Taksh",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Kana",
+                          "spouse": "Hansa",
+                          "children": [
+                            {
+                              "name": "Chandani",
+                              "daughter": true,
+                              "spouse": "Rohit",
+                              "children": []
+                            },
+                            {
+                              "name": "Diya",
+                              "daughter": true,
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Balu",
+                          "spouse": "Manjula",
+                          "children": [
+                            {
+                              "name": "Anita",
+                              "daughter": true,
+                              "spouse": "Vikas",
+                              "children": []
+                            },
+                            {
+                              "name": "Kelvin",
+                              "spouse": "Khushbu",
+                              "children": [
+                                {
+                                  "name": "Kanishk",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Sharda",
+                          "daughter": true,
+                          "spouse": "Parshotam",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "???",
+                      "daughter": true,
+                      "spouse": "",
+                      "children": []
+                    }
+                  ]
+                },
+                {
+                  "name": "Devshi",
+                  "spouse": "",
+                  "children": [
+                    {
+                      "name": "Lalji",
+                      "spouse": "Sati",
+                      "children": [
+                        {
+                          "name": "Arjan",
+                          "spouse": "Champa",
+                          "children": [
+                            {
+                              "name": "Ramesh",
+                              "spouse": "Nayna",
+                              "children": [
+                                {
+                                  "name": "Nirav",
+                                  "spouse": "Mansi",
+                                  "children": []
+                                },
+                                {
+                                  "name": "Denish",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Bipin",
+                              "spouse": "Shilpa",
+                              "children": [
+                                {
+                                  "name": "Drashti",
+                                  "daughter": true,
+                                  "spouse": "",
+                                  "children": []
+                                },
+                                {
+                                  "name": "Krisha",
+                                  "daughter": true,
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Parshotam",
+                          "spouse": "Rambha",
+                          "children": [
+                            {
+                              "name": "Vijay",
+                              "spouse": "Pragna",
+                              "children": [
+                                {
+                                  "name": "Ayushi",
+                                  "daughter": true,
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Lalit",
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Ketan",
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Tulshi",
+                          "spouse": "Rasila",
+                          "children": [
+                            {
+                              "name": "Savan",
+                              "spouse": "Svati",
+                              "children": [
+                                {
+                                  "name": "Shivansh",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            },
+                            {
+                              "name": "Ankit",
+                              "spouse": "Payal",
+                              "children": [
+                                {
+                                  "name": "Devanshi",
+                                  "spouse": "",
+                                  "children": []
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Savita",
+                          "daughter": true,
+                          "spouse": "Kara",
+                          "children": []
+                        },
+                        {
+                          "name": "Manju",
+                          "daughter": true,
+                          "spouse": "Vallabh",
+                          "children": []
+                        },
+                        {
+                          "name": "Lili",
+                          "daughter": true,
+                          "spouse": "Narotam",
+                          "children": []
+                        }
+                      ]
+                    },
+                    {
+                      "name": "Natha",
+                      "spouse": "Rambha",
+                      "children": [
+                        {
+                          "name": "Jaman",
+                          "spouse": "Rasila",
+                          "children": [
+                            {
+                              "name": "Rajesh",
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Babu",
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Ramnik",
+                          "spouse": "Jyotsna",
+                          "children": [
+                            {
+                              "name": "Sagar",
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Bhautik",
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "???",
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Dhiru",
+                          "spouse": "Saroj",
+                          "children": [
+                            {
+                              "name": "Pradip",
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Dhruvi",
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Hasu",
+                          "spouse": "Daksha",
+                          "children": [
+                            {
+                              "name": "Nimanshu",
+                              "daughter": true,
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Yatin",
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Jaya",
+                          "daughter": true,
+                          "spouse": "Jaman",
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Thobhan",
+                  "spouse": "",
+                  "children": [
+                    {
+                      "name": "Lakhman",
+                      "spouse": "Vagti",
+                      "children": [
+                        {
+                          "name": "Mohan",
+                          "spouse": "Jamna",
+                          "children": [
+                            {
+                              "name": "Champa",
+                              "daughter": true,
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Kanchan",
+                              "daughter": true,
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Bhanu",
+                              "daughter": true,
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Hansa",
+                              "daughter": true,
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        },
+                        {
+                          "name": "Khima",
+                          "spouse": "Jamku",
+                          "children": [
+                            {
+                              "name": "Suresh",
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "Chandu",
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "???",
+                              "spouse": "",
+                              "children": []
+                            },
+                            {
+                              "name": "???",
+                              "daughter": true,
+                              "spouse": "",
+                              "children": []
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
