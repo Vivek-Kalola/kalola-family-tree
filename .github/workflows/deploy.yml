@@ -1,0 +1,47 @@
+# Name of your workflow
+name: Deploy Eleventy to GitHub Pages
+
+# Run this workflow on every push to your main branch
+on:
+  push:
+    branches:
+      - main  # Or 'master' if that's your default branch
+
+# What to do
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write      # Allow it to write to GitHub Pages
+      id-token: write   # Allow it to authenticate
+      
+    steps:
+      # 1. Get your code from the repo
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # 2. Set up Node.js (so it can run Eleventy)
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      # 3. Install Eleventy (and any other tools)
+      - name: Install Dependencies
+        run: npm install
+
+      # 4. Run the Eleventy build command
+      - name: Build Site
+        run: npx @11ty/eleventy
+
+      # 5. Prepare the '_site' folder to be uploaded
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      # 6. Deploy the uploaded folder to GitHub Pages
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

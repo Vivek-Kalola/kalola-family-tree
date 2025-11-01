@@ -1,0 +1,293 @@
+---
+# This is "Front Matter" - it's instructions for Eleventy
+
+# 1. Tell Eleventy to use our 'people' list
+pagination:
+  data: people
+  size: 1
+  alias: person
+
+# 2. Create a unique URL (permalink) for each person
+# e.g., /people/p_001/index.html
+permalink: "people/{{ person.id }}/index.html"
+---
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>{{ person.name }} Kalola | Family Tree</title>
+ <style>
+  /* --- General Styles --- */
+  :root {
+   --brand-color: #0056b3;
+   --text-color: #333;
+   --light-text: #666;
+   --bg-color: #f8f9fa;
+   --card-bg: #ffffff;
+   --border-color: #eee;
+   --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  body {
+   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
+   margin: 0;
+   background-color: var(--bg-color);
+   color: var(--text-color);
+   line-height: 1.6;
+  }
+
+  .container {
+   max-width: 900px;
+   margin: 2rem auto;
+   padding: 0 1rem;
+  }
+
+  h1, h2, h3 {
+   color: #222;
+   line-height: 1.2;
+  }
+  
+  a {
+   color: var(--brand-color);
+   text-decoration: none;
+  }
+  a:hover {
+   text-decoration: underline;
+  }
+
+  /* --- Breadcrumb Navigation --- */
+  .breadcrumbs {
+   display: flex;
+   align-items: center;
+   background: var(--card-bg);
+   padding: 0.75rem 1.5rem;
+   border-radius: 8px;
+   box-shadow: var(--shadow);
+   margin-bottom: 2rem;
+   font-size: 0.9rem;
+   color: var(--light-text);
+  }
+  
+  .home-icon-btn {
+    display: inline-block;
+    padding: 0.25rem 0.5rem 0.1rem 0.5rem;
+    margin-right: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    line-height: 1;
+  }
+  .home-icon-btn:hover {
+    background: #f4f4f4;
+    text-decoration: none;
+  }
+  .home-icon-btn svg {
+    width: 1.1em;
+    height: 1.1em;
+    fill: #555;
+  }
+
+  .breadcrumbs a {
+   font-weight: 500;
+  }
+  .breadcrumbs > span {
+   margin: 0 0.5rem;
+  }
+
+  /* --- Profile Card (now with photo layout) --- */
+  .profile-card {
+   background: var(--card-bg);
+   border-radius: 8px;
+   box-shadow: var(--shadow);
+   padding: 2rem;
+   display: flex;
+   gap: 2rem;
+   align-items: flex-start;
+  }
+
+  .profile-photo {
+   flex-shrink: 0;
+   width: 150px;
+   height: 150px;
+   border-radius: 50%;
+   background: #eee;
+   overflow: hidden;
+  }
+  .profile-photo img {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+  }
+
+  .profile-info {
+   flex-grow: 1;
+  }
+  .profile-info h1 {
+   margin-top: 0;
+   margin-bottom: 0.25rem;
+   font-size: 2.5rem;
+  }
+  
+  .profile-occupation {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--brand-color);
+    margin-bottom: 1rem;
+  }
+
+  .profile-details {
+   font-style: italic;
+   color: var(--light-text);
+   margin-bottom: 1.5rem;
+   border-bottom: 1px solid var(--border-color);
+   padding-bottom: 1.5rem;
+  }
+  
+  .profile-details strong {
+    color: var(--text-color);
+    font-style: normal;
+  }
+
+  /* --- Spouse Section (Inside Profile Card) --- */
+  .profile-spouse {
+    background: #fdfdfd;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .profile-spouse h3 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+  }
+  .profile-spouse ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  /* --- Contact Info Section (Inside Profile Card) --- */
+  .profile-contact {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .profile-contact strong {
+    display: inline-block;
+    width: 80px;
+    color: #555;
+  }
+
+  /* --- Relations Grid (Bottom) --- */
+  .relations-grid {
+   display: grid;
+   grid-template-columns: 1fr; /* Only children now */
+   gap: 1.5rem;
+   margin-top: 2rem;
+  }
+
+  .relation-box {
+   background: var(--card-bg);
+   padding: 1.5rem;
+   border-radius: 8px;
+   box-shadow: var(--shadow);
+  }
+  .relation-box h3 {
+   margin-top: 0;
+   border-bottom: 2px solid var(--brand-color);
+   padding-bottom: 0.5rem;
+  }
+  .relation-box ul {
+   list-style: none;
+   padding-left: 0;
+   margin: 0;
+  }
+  .relation-box li {
+   margin-bottom: 0.5rem;
+  }
+  .relation-box li a {
+   font-weight: 500;
+   padding: 0.25rem 0;
+  }
+  .relation-box p {
+   color: var(--light-text);
+   font-style: italic;
+   margin: 0;
+  }
+ </style>
+</head>
+
+<body>
+
+ <div class="container">
+  <nav class="breadcrumbs">
+   <a href="/" class="home-icon-btn" aria-label="Family Tree Home">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8h5z"/>
+    </svg>
+   </a>
+   
+   {% for ancestor in person.ancestors %}
+   <span>&gt;</span> <a href="/people/{{ ancestor.id }}/">{{ ancestor.name }}</a>
+   {% endfor %}
+   <span>&gt;</span> <strong>{{ person.name }}</strong>
+  </nav>
+
+  <main class="profile-card">
+   
+   <div class="profile-photo">
+    <img src="https://i.sstatic.net/l60Hf.png" alt="Profile photo of {{ person.name }}">
+   </div>
+
+   <div class="profile-info">
+    <h1>{{ person.name }} Kalola</h1>
+    
+    <div class="profile-occupation">
+     Occupation?
+    </div>
+    
+    <div class="profile-contact">
+     <strong>Born:</strong>January 1, 1900 in India
+     <br>
+     <strong>If Died:</strong>December 31, 1980 in India
+     <br>
+     <strong>Location:</strong>India
+     <br>
+     <strong>Spouse:</strong>{{ person.spouse }}
+     <br>
+     <strong>Phone:</strong>(+91) 12345-67890
+     <br>
+     <strong>Email:</strong>name@example.com
+    </div>
+    
+    <div class="profile-bio">
+     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    </div>
+
+   </div>
+  </main>
+
+  <div class="relations-grid">
+   <section class="relation-box">
+    <h3>Children</h3>
+    {% if person.children and person.children.length > 0 %}
+    <ul>
+     {% for child in person.children %}
+     <li><a href="/people/{{ child.id }}/">{{ child.name }}</a></li>
+     {% endfor %}
+    </ul>
+    {% else %}
+    <p>No children listed.</p>
+    {% endif %}
+   </section>
+  </div>
+
+ </div>
+
+</body>
+</html>

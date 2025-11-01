@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalola Family Tree </title>
+  <style>
+    /* Full-screen canvas */
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    #chart-container {
+      width: 100%;
+      height: 100%;
+      cursor: grab;
+      /* Grab cursor for panning */
+    }
+
+    #chart-container:active {
+      cursor: grabbing;
+    }
+
+    /* Style for the nodes */
+    /* Base for all circles, will be overridden by more specific rules */
+    .node circle {
+      stroke-width: 4px;
+      transition: fill 0.3s, stroke 0.3s;
+      cursor: pointer;
+    }
+
+    .node circle:hover {
+      filter: brightness(1.2);
+    }
+
+    .node .info-circle {
+      stroke: oklch(37.2% 0.044 257.287);
+      fill: oklch(55.4% 0.046 257.417);
+      stroke-width: 3px;
+      cursor: pointer;
+    }
+
+    .node .info-text {
+      font-size: 20px;
+      font-weight: bold;
+      fill: oklch(98.4% 0.003 247.858);
+      pointer-events: none;
+    }
+
+    .node .person-circle {
+      stroke: oklch(27.7% 0.046 192.524);
+      fill: oklch(43.7% 0.078 188.216);
+    }
+
+    .node .spouse-circle {
+      stroke: oklch(27.7% 0.046 192.524);
+      fill: oklch(43.7% 0.078 188.216);
+    }
+
+    .node--daughter .person-circle {
+      stroke: oklch(28.4% 0.109 3.907);
+      fill: oklch(45.9% 0.187 3.815);
+    }
+
+    .node--daughter .spouse-circle {
+      stroke: oklch(28.4% 0.109 3.907);
+      fill: oklch(45.9% 0.187 3.815);
+    }
+
+
+    /* Text styles */
+    .node text {
+      font-size: 14px;
+      fill: #333;
+    }
+
+    .node tspan.name,
+    .node tspan.spouse {
+      font-weight: bold;
+    }
+
+    .node tspan.spouse,
+    .node tspan.name,
+    .node--daughter tspan.name,
+    .node--daughter tspan.spouse {
+      fill: oklch(98.4% 0.003 247.858);
+    }
+
+
+    /* Link styles (curved) */
+    .link {
+      fill: none;
+      stroke: oklch(55.4% 0.046 257.417);
+      stroke-width: 4px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div>
+    <button id="btn-language">
+      Gujarati
+    </button>
+  </div>
+  <div id="chart-container">
+  </div>
+  <script src="https://d3js.org/d3.v7.min.js">
+  </script>
+
+  <script>
+    const treeData = {{ family | dump | safe}}; // Example data for demonstration
+    const translator = {{ dictionary | dump | safe}}; // Example dictionary
+    var isGujarati = false;
+  </script>
+
+  <script>
+    // --- 2. CHART SETTINGS ---
+    // Use dynamic window dimensions
+    let width = window.innerWidth;
+    let height = window.innerHeight;
+
+    const margin = ({ top: 80, right: 120, bottom: 80, left: 120 });
+
+    // --- OPTIMIZATION: Increased horizontal spacing ---
+    // Increased from 100 to 150 to prevent text overlap
+    const dx = 300;
+    // Vertical spacing between generations
+    const dy = 240;
+    const duration = 200; // Animation duration
+
+    const tree = d3.tree().nodeSize([dx, dy]);
+
+    // --- 3. PREPARE THE DATA ---
+    const root = d3.hierarchy(treeData);
+    root.x0 = 0;
+    root.y0 = 0;
+
+    root.descendants().forEach((d, i) => {
+      d.id = i; // Use index as the unique D3 ID
+      d.data.id = i; // Generate dynamic IDs [make sure this is in sync with _data/people.js]
+      d._children = d.children;
+      if (d.depth > 3) d.children = null;
+    });
+
+    // --- 4. CREATE THE SVG CONTAINER ---
+    const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [0, 0, width, height])
+      .style("background-color", "#f9f9f9");
+
+    // Main group for panning and zooming
+    const g = svg.append("g");
+
+    const gLink = g.append("g");
+
+    const gNode = g.append("g")
+      .attr("pointer-events", "all");
+
+    // --- 5. DEFINE ZOOM & CENTERING ---
+    const zoom = d3.zoom()
+      .scaleExtent([0.1, 3])
+      .on("zoom", (event) => {
+        g.attr("transform", event.transform);
+      });
+
+    // IMPROVEMENT: Updated to use dynamic window dimensions
+    function centerNode(node) {
+      const k = d3.zoomTransform(svg.node()).k; // Get current scale
+      const w = window.innerWidth;
+      const h = window.innerHeight;
+
+      svg.transition().duration(500)
+        .call(zoom.transform, d3.zoomIdentity
+          .translate(w / 2, h / 2) // Move origin to center
+          .scale(k) // Apply current scale
+          .translate(-node.x, -node.y) // Move node's (x,y) to origin
+        );
+    }
+
+    // IMPROVEMENT: Custom curved link generator
+    function curvedLink(d) {
+      // Creates a vertical quadratic Bézier curve.
+      const sourceX = d.source.x;
+      const sourceY = d.source.y;
+      const targetX = d.target.x;
+      const targetY = d.target.y;
+
+      // Midpoint for control
+      const midY = (sourceY + targetY) / 2;
+
+      return `M${sourceX},${sourceY} C${sourceX},${midY} ${targetX},${midY} ${targetX},${targetY}`;
+    }
+
+    // --- 6. THE MAIN UPDATE FUNCTION ---
+    function update(source) {
+      const nodes = root.descendants().reverse();
+      const links = root.links();
+
+      // Compute the new layout.
+      tree(root);
+
+      // --- Update the Nodes ---
+      const node = gNode.selectAll("g.node")
+        .data(nodes, d => d.id); // Join based on the index ID
+
+      const nodeEnter = node.enter().append("g")
+        .attr("class", d => `node ${d.data.daughter ? "node--daughter" : ""}`)
+        .attr("transform", d => `translate(${source.x0},${source.y0})`)
+        .attr("fill-opacity", 0)
+        .attr("stroke-opacity", 0)
+        .on("click", (event, d) => {
+          d.children = d.children ? null : d._children;
+          update(d); // Re-run the update
+
+          // Center on the clicked node after transition
+          setTimeout(() => {
+            centerNode(d);
+          }, duration + 50);
+        });
+
+      // CLICK THE CIRCLE TO COLLAPSE AND CENTER
+      nodeEnter.append("circle")
+        .attr("class", "person-circle")
+        .attr("r", 54)
+        .attr("cx", d => d.data.spouse ? -54 : 0);
+
+
+      nodeEnter.filter(d => d.data.spouse).append("circle")
+        .attr("class", "spouse-circle")
+        .attr("r", 48)
+        .attr("cx", 48);
+
+      nodeEnter.append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", d => d.data.spouse ? -54 : 0) // Also dynamic
+        .attr("dy", "0.3em") // Helps vertically center the text
+        .append("tspan")
+        .attr("class", "name")
+        .text((d) => {
+          if (isGujarati) {
+            return translator[d.data.name];
+          }
+          return d.data.name;
+        });
+
+      nodeEnter.filter(d => d.data.spouse)
+        .append("text")
+        .attr("text-anchor", "middle")
+        .attr("x", 48) // Position over spouse circle
+        .attr("dy", "0.3em") // Helps vertically center the text
+        .append("tspan")
+        .attr("class", "spouse")
+        .text((d) => {
+          if (isGujarati) {
+            return translator[d.data.spouse];
+          }
+          return d.data.spouse;
+        });
+
+      // Info icon!
+      nodeEnter.append("circle")
+        .attr("class", "info-circle")
+        .attr("r", 16)
+        .attr("cy", d => d.data.spouse ? -48 : -72)
+        .attr("cx", d => d.data.spouse ? 1 : 0)
+        .on("click", (event, d) => {
+          event.stopPropagation(); // Keep this! Prevents expand/collapse
+          window.location.href = `people/${d.data.id}/`;
+        });
+
+      nodeEnter.append("text")
+        .attr("class", "info-text")
+        .attr("text-anchor", "middle")
+        .attr("y", d => d.data.spouse ? -48 : -72)
+        .attr("x", d => d.data.spouse ? 1 : 0)
+        .attr("dy", "0.4em") // Helps vertically center the text
+        .text("i");
+
+      // Transition nodes to their new position.
+      // Get the merged selection (don't chain .transition() yet)
+      const nodeUpdate = node.merge(nodeEnter);
+
+      // Apply the transition
+      nodeUpdate.transition().duration(duration)
+        .attr("transform", d => `translate(${d.x},${d.y})`)
+        .attr("fill-opacity", 1)
+        .attr("stroke-opacity", 1);
+
+      // NOW, update text on ALL nodes (entering and existing)
+      nodeUpdate.select("tspan.name")
+        .text((d) => {
+          if (isGujarati) {
+            return translator[d.data.name];
+          }
+          return d.data.name;
+        });
+
+      nodeUpdate.select("tspan.spouse")
+        .text((d) => {
+          if (d.data.spouse) { // Check if spouse exists for text update
+            if (isGujarati) {
+              return translator[d.data.spouse];
+            }
+            return d.data.spouse;
+          }
+          return "";
+        });
+
+      // ADDED: Update class attributes on all nodes (for expand/collapse)
+      node.merge(nodeEnter)
+        .attr("class", d => `node ${d.data.daughter ? "node--daughter" : ""}`);
+
+
+      // Transition exiting nodes to the parent's new position.
+      node.exit().transition().duration(duration).remove()
+        .attr("transform", d => `translate(${source.x},${source.y})`)
+        .attr("fill-opacity", 0)
+        .attr("stroke-opacity", 0);
+
+      // --- Update the Links (Now Curved) ---
+      const link = gLink.selectAll("path")
+        .data(links, d => d.target.id);
+
+      // Enter new links at the parent's previous position.
+      const linkEnter = link.enter().append("path")
+        .attr("class", "link")
+        .attr("d", d => {
+          const o = { x: source.x0, y: source.y0 };
+          // Draw a flat line from the source
+          return `M${o.x},${o.y} C${o.x},${o.y} ${o.x},${o.y} ${o.x},${o.y}`;
+        });
+
+      // Transition links to their new position.
+      link.merge(linkEnter).transition().duration(duration)
+        .attr("d", curvedLink); // Use the new curved link generator
+
+      // Transition exiting links to the parent's new position.
+      link.exit().transition().duration(duration).remove()
+        .attr("d", d => {
+          const o = { x: source.x, y: source.y };
+          // Collapse the link back into the source
+          return `M${o.x},${o.y} C${o.x},${o.y} ${o.x},${o.y} ${o.x},${o.y}`;
+        });
+
+      // Stash the old positions for transition.
+      root.eachBefore(d => {
+        d.x0 = d.x;
+        d.y0 = d.y;
+      });
+    }
+
+    // --- 7. RESIZE HANDLER ---
+    // IMPROVEMENT: Make the chart responsive
+    function handleResize() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      svg.attr("width", width)
+        .attr("height", height)
+        .attr("viewBox", [0, 0, width, height]);
+
+      // Re-center the view on the root node
+      const k = d3.zoomTransform(svg.node()).k;
+
+      svg.transition().duration(250)
+        .call(zoom.transform, d3.zoomIdentity
+          .translate(width / 2, margin.top) // Move origin to top-center
+          .scale(k)
+          .translate(-root.x, -root.y) // Center the root node
+        );
+    }
+
+    window.addEventListener('resize', handleResize);
+
+    // --- 8. INITIALIZE ZOOM & RENDER ---
+
+    // Call zoom to attach it to the SVG
+    svg.call(zoom);
+
+    // --- Initial Render ---
+    update(root); // This synchronously computes root.x and root.y
+
+    // --- BUG FIX: Center on the Root Node on Load ---
+    // The original code didn't account for the root's calculated x/y position.
+    setTimeout(() => {
+      const k = 1.0; // Initial scale
+
+      svg.transition().duration(750)
+        .call(zoom.transform, d3.zoomIdentity
+          .translate(width / 2, margin.top) // Move viewport origin to top-center
+          .scale(k)
+          .translate(-root.x, -root.y) // Pan to align the root node with the origin
+        );
+    }, 100); // Small delay to ensure everything is rendered
+
+    // --- Add the SVG to the page ---
+    document.getElementById("chart-container").append(svg.node());
+    document.getElementById("btn-language").onclick = function () {
+      isGujarati = !isGujarati;
+      document.getElementById("btn-language").innerHTML = isGujarati ? "English" : "Gujarati";
+      update(root);
+    };
+  </script>
+
+</body>
+
+</html>
